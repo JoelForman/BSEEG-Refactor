@@ -25,7 +25,7 @@
         justify-content: center;
         flex-direction: column;
         position: absolute;
-        top: 215px;
+        top: 195px;
         left: 550px;
     }
     .drag-image.active{
@@ -57,7 +57,7 @@
         border:1px solid #fff;
         border-radius: 5px;
         cursor: pointer;
-        transition:all 0.5s;
+        transition:all 0.3s;
     }
 
     .drag-image button:hover{
@@ -85,6 +85,7 @@
     }
     .navbar-brand:hover{
         color: black;
+        transition:all 0.4s;
     }
     .container-fluid {        
         margin-right: auto;    
@@ -95,25 +96,39 @@
     .app-title{
         font-size: 20px;
         font-weight: 300;
-        color: #556D96;
+        color: #4B4B4B;
         position: absolute;
-        top: 130px;
+        top: 110px;
         left: 510px;
     }
     .btn.btn-outline-success{
         position: absolute;
-        top: 545px;
+        top: 605px;
         left: 632px;
         font-size: 20px;
         padding: 15px 30px;
         border-radius: 5px;
         color: #556D96;
         border:1px solid #6c8bbd;
+        transition:all 0.3s;
     }
     .btn.btn-outline-success:hover{
         background-color:#6c8bbd;
         color:white;
         border:1px solid #6c8bbd;
+    }
+    .form-check1{
+        position: absolute;
+        top: 520px;
+        left: 625px;
+    }
+    .form-check2{
+        position: absolute;
+        top: 550px;
+        left: 625px;
+    }
+    .form-check-label{
+        padding-left: 5px;
     }
 </style>
 <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
@@ -189,17 +204,17 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">BSEEG Calculator</a>
+      <a class="navbar-brand" href="index.html">BSEEG Calculator</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Run</a>
+            <a class="nav-link active" aria-current="page" href="index.html">Run</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="about.html">About</a>
           </li>
         </ul>
       </div>
@@ -220,5 +235,17 @@
         <input type="file" hidden>
     </div>
     <button type="button" class="btn btn-outline-success">Run Analysis</button>
+    <div class="form-check1">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Fill incomplete recording
+        </label>
+      </div>
+    <div class="form-check2">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+            Remove disruptions
+        </label>
+    </div>
 </main>
 {% endblock %}
