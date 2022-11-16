@@ -15,7 +15,6 @@
         display: flex;
     }
     .drag-image{
-        border: 1px dashed #fff;
         background-color: #6c8bbd;
         height: 300px;
         width: 350px;
@@ -25,6 +24,9 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        position: absolute;
+        top: 215px;
+        left: 550px;
     }
     .drag-image.active{
         border: 2px solid #fff;
@@ -84,6 +86,35 @@
     .navbar-brand:hover{
         color: black;
     }
+    .container-fluid {        
+        margin-right: auto;    
+        margin-left: auto;    
+        max-width: 100%;    
+        min-width: 1440px;
+    }
+    .app-title{
+        font-size: 20px;
+        font-weight: 300;
+        color: #556D96;
+        position: absolute;
+        top: 130px;
+        left: 510px;
+    }
+    .btn.btn-outline-success{
+        position: absolute;
+        top: 545px;
+        left: 632px;
+        font-size: 20px;
+        padding: 15px 30px;
+        border-radius: 5px;
+        color: #556D96;
+        border:1px solid #6c8bbd;
+    }
+    .btn.btn-outline-success:hover{
+        background-color:#6c8bbd;
+        color:white;
+        border:1px solid #6c8bbd;
+    }
 </style>
 <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -119,7 +150,7 @@
 
     dropArea.addEventListener("dragleave", ()=>{
         dropArea.classList.remove("active");
-        dragText.textContent = "Drag & Drop to Upload File";
+        dragText.textContent = "Drag & Drop EDF File Here";
     }); 
 
     dropArea.addEventListener("drop", (event)=>{
@@ -178,13 +209,16 @@
 
 {% block content %}
 <main>
-<div class="drag-image">
-    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-    <h6>Drag & Drop File Here</h6>
-    <span>OR</span>
-    <button>Browse File</button>
-    <input type="file" hidden>
-</div>
-<button type="button" class="btn btn-outline-success">Success</button>
+    <div class="app-title">
+        <h1>BSEEG Score Analysis</h1>
+    </div>
+    <div class="drag-image">
+        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+        <h6>Drag & Drop EDF File Here</h6>
+        <span>OR</span>
+        <button>Browse File</button>
+        <input type="file" hidden>
+    </div>
+    <button type="button" class="btn btn-outline-success">Run Analysis</button>
 </main>
 {% endblock %}
