@@ -12,5 +12,9 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/analysis.html')
+def analysis():
+    return render_template('analysis.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
