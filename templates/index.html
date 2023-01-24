@@ -1,225 +1,24 @@
-{% extends "bootstrap/base.html" %}
+{% extends "layout.html" %}
 
 {% block styles %}
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
-    body{
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
-    .drag-image{
-        background-color: #6c8bbd;
-        height: 300px;
-        width: 350px;
-        border-radius: 12px;
-        font-weight:400;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        position: absolute;
-        top: 195px;
-        left: 550px;
-    }
-    .drag-image.active{
-        border: 2px solid #fff;
-    }
-    .drag-image .icon{
-        font-size: 30px;
-        color: #fff;
-    }
-    .drag-image h6{
-        font-size: 20px;
-        font-weight: 300;
-        color: #fff;
-    }
-    .drag-image span{
-        font-size: 14px;
-        font-weight: 300;
-        color: #fff;
-        margin: 10px 0 15px 0;
-    }
-    .drag-image button{
-        padding: 10px 25px;
-        font-size: 14px; 
-        font-weight: 300;
-        border: none;
-        outline: none;
-        background:transparent;
-        color: #fff;
-        border:1px solid #fff;
-        border-radius: 5px;
-        cursor: pointer;
-        transition:all 0.3s;
-    }
-
-    .drag-image button:hover{
-        background-color:#fff;
-        color:#6c8bbd;
-    }
-
-    .drag-image img{
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 5px;
-    }
-    .navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link{
-        color: gray;
-    }
-    .navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link:hover{
-        color: black;
-    }
-    .navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link.active{
-        color: black;
-    }
-    .navbar-brand{
-        color: black;
-    }
-    .navbar-brand:hover{
-        color: black;
-        transition:all 0.4s;
-    }
-    .container-fluid {        
-        margin-right: auto;    
-        margin-left: auto;    
-        max-width: 100%;    
-        min-width: 1440px;
-    }
-    .app-title{
-        font-size: 20px;
-        font-weight: 300;
-        color: #4B4B4B;
-        position: absolute;
-        top: 110px;
-        left: 510px;
-    }
-    .btn.btn-outline-success{
-        position: absolute;
-        top: 605px;
-        left: 632px;
-        font-size: 20px;
-        padding: 15px 30px;
-        border-radius: 5px;
-        color: #556D96;
-        border:1px solid #6c8bbd;
-        transition:all 0.3s;
-    }
-    .btn.btn-outline-success:hover{
-        background-color:#6c8bbd;
-        color:white;
-        border:1px solid #6c8bbd;
-    }
-    .form-check1{
-        position: absolute;
-        top: 520px;
-        left: 625px;
-    }
-    .form-check2{
-        position: absolute;
-        top: 550px;
-        left: 625px;
-    }
-    .form-check-label{
-        padding-left: 5px;
-    }
-</style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 {% endblock %}
 
 {% block scripts %}
 {{super()}}
-<script>
-    const dropArea = document.querySelector(".drag-image"),
-    dragText = dropArea.querySelector("h6"),
-    orText = dropArea.querySelector("span"),
-    button = dropArea.querySelector("button"),
-    input = dropArea.querySelector("input");
-    let file; 
-
-    button.onclick = ()=>{
-        input.click(); 
-    }
-
-    input.addEventListener("change", function(){
-    
-        file = this.files[0];
-        dropArea.classList.add("active");
-        viewfile();
-    });
-
-    dropArea.addEventListener("dragover", (event)=>{
-        event.preventDefault();
-        dropArea.classList.add("active");
-        dragText.textContent = "Release to Upload File";
-    });
-
-
-    dropArea.addEventListener("dragleave", ()=>{
-        dropArea.classList.remove("active");
-        dragText.textContent = "Drag & Drop EDF File Here";
-    }); 
-
-    dropArea.addEventListener("drop", (event)=>{
-        event.preventDefault(); 
-        dragText.textContent = "File Uploaded Successfully";
-        orText.textContent = "";
-        button.textContent = "Browse Different File";
-        
-        file = event.dataTransfer.files[0];
-        viewfile(); 
-    });
-
-    function viewfile(){
-        console.log("File Type: ");
-        console.log(file.type);
-        // let fileType = file.type; 
-        // let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-        // if(validExtensions.includes(fileType)){ 
-        //     let fileReader = new FileReader(); 
-        //     fileReader.onload = ()=>{
-        //     let fileURL = fileReader.result; 
-        //     let imgTag = `<img src="${fileURL}" alt="image">`;
-        //     dropArea.innerHTML = imgTag; 
-        //     }
-        //     fileReader.readAsDataURL(file);
-        // }else{
-        //     alert("This is not an Image File!");
-        //     dropArea.classList.remove("active");
-        //     dragText.textContent = "Drag & Drop to Upload File";
-        // }
-    }
-</script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
 
-{% block navbar %}
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">BSEEG Calculator</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Run</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-</nav>
+{% block navbarItem %}
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="index.html">Run</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="about.html">About</a>
+</li>
 {% endblock %}
 
 {% block content %}
