@@ -26,25 +26,27 @@
     <div class="app-title">
         <h1>BSEEG Score Analysis</h1>
     </div>
-    <div class="drag-image">
-        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-        <h6>Drag & Drop EDF File Here</h6>
-        <span>OR</span>
-        <button>Browse File</button>
-        <input type="file" hidden>
-    </div>
-    <div class="form-check1">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-            Fill incomplete recording
-        </label>
-      </div>
-    <div class="form-check2">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-        <label class="form-check-label" for="flexCheckChecked">
-            Remove disruptions
-        </label>
-    </div>
-    <button type="button" onclick= "window.location.href='analysis.html'" class="btn btn-outline-success">Run Analysis</button>
+    <form method="post" enctype="multipart/form-data" action="{{url_for('analysis')}}">
+        <div class="drag-image">
+            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h6>Choose EDF File</h6>
+           <!-- <span>OR</span> -->
+            <!-- <button>Browse File</button> -->
+            <input type="file" name="file">
+        </div>
+        <div class="form-check1">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Fill incomplete recording
+            </label>
+        </div>
+        <div class="form-check2">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Remove disruptions
+            </label>
+        </div>
+    <button type="submit" class="btn btn-outline-success">Run Analysis</button>
+    </form>
 </main>
 {% endblock %}
