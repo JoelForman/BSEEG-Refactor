@@ -27,13 +27,17 @@
         <h1>BSEEG Score Analysis</h1>
     </div>
     <form method="post" enctype="multipart/form-data" action="{{url_for('analysis')}}">
-        <div class="drag-image">
-            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-            <h6>Choose EDF File</h6>
-           <!-- <span>OR</span> -->
-            <!-- <button>Browse File</button> -->
-            <input type="file" name="file">
-        </div>
+        <label class="custom-file-upload">
+            <div class="drag-image">
+                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h6>Choose EDF File</h6>
+                <!-- <span>OR</span> -->
+                <!-- <button>Browse File</button> -->
+                
+                <input type="file" name="file" id="file-input" onchange="showFileName(this)">
+                <p id="filename"></p>
+            </div>
+        </label>
         <div class="form-check1">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">

@@ -119,12 +119,17 @@ def readEDF(filepath, filldisrupt = False):
     print(f'final hour by hour ratios ch2: {final_hour_ratio_avgs_ch2}')
 
     # standardize
+    final_hour_ratio_avgs_ch1[final_hour_ratio_avgs_ch1 == 0] = np.nan
+    final_hour_ratio_avgs_ch2[final_hour_ratio_avgs_ch2 == 0] = np.nan
 
-    print(f'standardized final hour by hour ratios ch1: {(final_hour_ratio_avgs_ch1 - np.mean(final_hour_ratio_avgs_ch1)) / np.std(final_hour_ratio_avgs_ch1)}')
-    print(f'standardized final hour by hour ratios ch2: {(final_hour_ratio_avgs_ch2 - np.mean(final_hour_ratio_avgs_ch2)) / np.std(final_hour_ratio_avgs_ch2)}')
+    standardized_ratio_avgs_ch1 = (final_hour_ratio_avgs_ch1 - np.nanmean(final_hour_ratio_avgs_ch1)) / np.nanstd(final_hour_ratio_avgs_ch1)
+    standardized_ratio_avgs_ch2 = (final_hour_ratio_avgs_ch2 - np.nanmean(final_hour_ratio_avgs_ch2)) / np.nanstd(final_hour_ratio_avgs_ch2)
+
+    print(f'standardized final hour by hour ratios ch1: {standardized_ratio_avgs_ch1}')
+    print(f'standardized final hour by hour ratios ch2: {standardized_ratio_avgs_ch2}')
 
     #return (final_hour_ratio_avgs_ch1 - np.mean(final_hour_ratio_avgs_ch1)) / np.std(final_hour_ratio_avgs_ch1), (final_hour_ratio_avgs_ch2 - np.mean(final_hour_ratio_avgs_ch2)) / np.std(final_hour_ratio_avgs_ch2)
-    return final_hour_ratio_avgs_ch1, final_hour_ratio_avgs_ch2
+    return standardized_ratio_avgs_ch1, standardized_ratio_avgs_ch2
 
 @app.route('/analysis.html', methods=['GET', 'POST'])
 def analysis():

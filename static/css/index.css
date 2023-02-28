@@ -126,3 +126,24 @@ body{
 .form-check-label{
     padding-left: 5px;
 }
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+#filename {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}

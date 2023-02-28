@@ -1,15 +1,17 @@
-// const dropArea = document.querySelector(".drag-image"),
-//     dragText = dropArea.querySelector("h6"),
-//     orText = dropArea.querySelector("span"),
-//     button = dropArea.querySelector("button"),
-//     input = dropArea.querySelector("input");
-//     let file; 
+function showFileName(input) {
+    var fileName = input.files[0].name;
+    document.getElementById("filename").innerHTML = fileName;
+  }
+
+// var fileInput = document.getElementById("file-input");
+
+// var dropArea = document.getElementById("drag-image");
 
 // button.onclick = ()=>{
 //     input.click(); 
 // }
 
-// input.addEventListener("change", function(){
+// fileInput.addEventListener("change", function(){
 //     file = this.files[0];
 //     dropArea.classList.add("active");
 //     viewfile();
@@ -28,31 +30,32 @@
 // }); 
 
 // dropArea.addEventListener("drop", (event)=>{
+
+//     console.log('dropped......');
 //     event.preventDefault(); 
 //     dragText.textContent = "File Uploaded Successfully";
 //     orText.textContent = "";
-//     button.textContent = "Browse Different File";
     
-//     file = event.dataTransfer.files[0];
-//     viewfile(); 
+//     fileInput.files = event.dataTransfer.files[0];
+//     viewfile(fileInput); 
 // });
 
-// function viewfile(){
-//     console.log("File Type: ");
-//     console.log(file.type);
-//     // let fileType = file.type; 
-//     // let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-//     // if(validExtensions.includes(fileType)){ 
-//     //     let fileReader = new FileReader(); 
-//     //     fileReader.onload = ()=>{
-//     //     let fileURL = fileReader.result; 
-//     //     let imgTag = `<img src="${fileURL}" alt="image">`;
-//     //     dropArea.innerHTML = imgTag; 
-//     //     }
-//     //     fileReader.readAsDataURL(file);
-//     // }else{
-//     //     alert("This is not an Image File!");
-//     //     dropArea.classList.remove("active");
-//     //     dragText.textContent = "Drag & Drop to Upload File";
-//     // }
+// function viewfile(input){
+//     var fileName = input.files[0].name;
+//     document.getElementById("filename").innerHTML = fileName;
+    // let fileType = file.type; 
+    // let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    // if(validExtensions.includes(fileType)){ 
+    //     let fileReader = new FileReader(); 
+    //     fileReader.onload = ()=>{
+    //     let fileURL = fileReader.result; 
+    //     let imgTag = `<img src="${fileURL}" alt="image">`;
+    //     dropArea.innerHTML = imgTag; 
+    //     }
+    //     fileReader.readAsDataURL(file);
+    // }else{
+    //     alert("This is not an Image File!");
+    //     dropArea.classList.remove("active");
+    //     dragText.textContent = "Drag & Drop to Upload File";
+    // }
 // }
