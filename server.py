@@ -83,8 +83,8 @@ def readEDF(filepath, filldisrupt = False):
         ten_min_ratios_ch1 = np.append(ten_min_ratios_ch1, avg_3hz_psd_ch1/avg_10hz_psd_ch1)
         ten_min_ratios_ch2 = np.append(ten_min_ratios_ch2, avg_3hz_psd_ch2/avg_10hz_psd_ch2)
 
-    print(f'all ten min rations channel1: {ten_min_ratios_ch1}')
-    print(f'all ten min rations channel2: {ten_min_ratios_ch2}')
+    # print(f'all ten min rations channel1: {ten_min_ratios_ch1}')
+    # print(f'all ten min rations channel2: {ten_min_ratios_ch2}')
 
     final_hour_ratio_avgs_ch1 = np.array([])
     final_hour_ratio_avgs_ch2 = np.array([])    
@@ -115,8 +115,9 @@ def readEDF(filepath, filldisrupt = False):
             avg = sum / num_total
         final_hour_ratio_avgs_ch2 = np.append(final_hour_ratio_avgs_ch2, avg)
 
-    print(f'final hour by hour ratios ch1: {final_hour_ratio_avgs_ch1}')
-    print(f'final hour by hour ratios ch2: {final_hour_ratio_avgs_ch2}')
+    print('\n\n\n\nFinal Values Calculated:\n\n')
+    print(f'final hour by hour ratios ch1: \n{final_hour_ratio_avgs_ch1}\n\n')
+    print(f'final hour by hour ratios ch2: \n{final_hour_ratio_avgs_ch2}\n\n')
 
     # standardize
     final_hour_ratio_avgs_ch1[final_hour_ratio_avgs_ch1 == 0] = np.nan
@@ -125,8 +126,8 @@ def readEDF(filepath, filldisrupt = False):
     standardized_ratio_avgs_ch1 = (final_hour_ratio_avgs_ch1 - np.nanmean(final_hour_ratio_avgs_ch1)) / np.nanstd(final_hour_ratio_avgs_ch1)
     standardized_ratio_avgs_ch2 = (final_hour_ratio_avgs_ch2 - np.nanmean(final_hour_ratio_avgs_ch2)) / np.nanstd(final_hour_ratio_avgs_ch2)
 
-    print(f'standardized final hour by hour ratios ch1: {standardized_ratio_avgs_ch1}')
-    print(f'standardized final hour by hour ratios ch2: {standardized_ratio_avgs_ch2}')
+    print(f'standardized final hour by hour ratios ch1: \n{standardized_ratio_avgs_ch1}\n\n')
+    print(f'standardized final hour by hour ratios ch2: \n{standardized_ratio_avgs_ch2}\n\n')
 
     #return (final_hour_ratio_avgs_ch1 - np.mean(final_hour_ratio_avgs_ch1)) / np.std(final_hour_ratio_avgs_ch1), (final_hour_ratio_avgs_ch2 - np.mean(final_hour_ratio_avgs_ch2)) / np.std(final_hour_ratio_avgs_ch2)
     return standardized_ratio_avgs_ch1, standardized_ratio_avgs_ch2
