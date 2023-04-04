@@ -49,42 +49,69 @@ def readEDF(filepath, filldisrupt = False):
         # print(f'channel 1 interval {i} length: {len(ten_min_signals_ch1)}')
         # print(f'channel 2 interval {i} length: {len(ten_min_signals_ch2)}')
 
-        ten_min_psd_ch1 = signal.welch(ten_min_signals_ch1, len(ten_min_signals_ch1) / 600)[1]
-        ten_min_psd_ch2 = signal.welch(ten_min_signals_ch2, len(ten_min_signals_ch2) / 600)[1]
+        # filtered_3hz_ch1 = np.array([x for x in ten_min_signals_ch1 if 3 <= x <= 3.5])
+        # filtered_3hz_ch2 = np.array([x for x in ten_min_signals_ch2 if 3 <= x <= 3.5])
+        # # print(f'filtered_psd_3hz_ch1: {filtered_psd_3hz_ch1}')
+        # # print(f'filtered_psd_3hz_ch2: {filtered_psd_3hz_ch2}')
 
-        # print(f'len of psd of 10 min interval of channel 1: {len(ten_min_psd_ch1)}')
-        # print(f'len of psd of 10 min interval of channel 2: {len(ten_min_psd_ch2)}')
+        # filtered_10hz_ch1 = np.array([x for x in ten_min_signals_ch1 if 9.5 <= x <= 10])
+        # filtered_10hz_ch2 = np.array([x for x in ten_min_signals_ch2 if 9.5 <= x <= 10])
 
+        ten_min_psd_ch1_freqs, ten_min_psd_ch1_power  = signal.welch(ten_min_signals_ch1, len(ten_min_signals_ch1) / 12000)
+        #print(f'len comparison: {len(ten_min_psd_ch1_freqs)} and {len(ten_min_psd_ch1_power)}')
+        ten_min_psd_ch2_freqs, ten_min_psd_ch2_power = signal.welch(ten_min_signals_ch2, len(ten_min_signals_ch1) / 12000)
+        #print(f'len comparison: {len(ten_min_psd_ch2_freqs)} and {len(ten_min_psd_ch2_power)}')
 
-        # filter by frequencies
+        print(f'ch1 freqs: {ten_min_psd_ch1_freqs}')
+        print(f'ch1 power: {ten_min_psd_ch1_power}')
 
-        filtered_psd_3hz_ch1 = np.array([x for x in ten_min_psd_ch1 if 3 <= x <= 3.5])
-        filtered_psd_3hz_ch2 = np.array([x for x in ten_min_psd_ch2 if 3 <= x <= 3.5])
-        # print(f'filtered_psd_3hz_ch1: {filtered_psd_3hz_ch1}')
-        # print(f'filtered_psd_3hz_ch2: {filtered_psd_3hz_ch2}')
+        sum_ch1_power_3hz = 0
+        total_3hz_ch1 = 0
+        sum_ch1_power_10hz = 0
+        total_10hz_ch1 = 0
 
-        filtered_psd_10hz_ch1 = np.array([x for x in ten_min_psd_ch1 if 9.5 <= x <= 10])
-        filtered_psd_10hz_ch2 = np.array([x for x in ten_min_psd_ch2 if 9.5 <= x <= 10])
-        # print(f'filtered_psd_10hz_ch1: {filtered_psd_10hz_ch1}')
-        # print(f'filtered_psd_10hz_ch2: {filtered_psd_10hz_ch2}')
+        sum_ch2_power_3hz = 0
+        total_3hz_ch2 = 0
+        sum_ch2_power_10hz = 0
+        total_10hz_ch2 = 0
 
-        # take averages
+        for i in range(len(ten_min_psd_ch1_freqs)):
+            if 3 <= ten_min_psd_ch1_freqs[i] <= 3.5:
+                sum_ch1_power_3hz += ten_min_psd_ch1_power[i]
+                #print(f'3hz power: {ten_min_psd_ch1_power[i]}')
+                total_3hz_ch1 += 1
+            elif 9.5 <= ten_min_psd_ch1_freqs[i] <= 10:
+                sum_ch1_power_10hz += ten_min_psd_ch1_power[i]
+                #print(f'10hz power: {ten_min_psd_ch1_power[i]}')
+                total_10hz_ch1 += 1
+            if 3 <= ten_min_psd_ch2_freqs[i] <= 3.5:
+                sum_ch2_power_3hz += ten_min_psd_ch2_power[i]
+                #print(f'3hz power: {ten_min_psd_ch1_power[i]}')
+                total_3hz_ch2 += 1
+            elif 9.5 <= ten_min_psd_ch2_freqs[i] <= 10:
+                sum_ch2_power_10hz += ten_min_psd_ch2_power[i]
+                #print(f'10hz power: {ten_min_psd_ch1_power[i]}')
+                total_10hz_ch2 += 1
 
-        avg_3hz_psd_ch1 = np.mean(filtered_psd_3hz_ch1)
-        avg_3hz_psd_ch2 = np.mean(filtered_psd_3hz_ch2)
-        # print(f'mean 3hz psd ch1: {avg_3hz_psd_ch1}')
-        # print(f'mean 3hz psd ch2: {avg_3hz_psd_ch2}')
+        avg_ch1_power_3hz = sum_ch1_power_3hz / total_3hz_ch1
+        print(f'ch1 avg 3hz: {avg_ch1_power_3hz}')
+        avg_ch1_power_10hz = sum_ch1_power_10hz / total_10hz_ch1
+        print(f'ch1 avg 10hz: {avg_ch1_power_10hz}')
+        ch1_power_ratio = avg_ch1_power_3hz / avg_ch1_power_10hz
 
-        avg_10hz_psd_ch1 = np.mean(filtered_psd_10hz_ch1)
-        avg_10hz_psd_ch2 = np.mean(filtered_psd_10hz_ch2)
-        # print(f'mean 10hz psd ch1: {avg_10hz_psd_ch1}')
-        # print(f'mean 10hz psd ch2: {avg_10hz_psd_ch2}')
+        avg_ch2_power_3hz = sum_ch2_power_3hz / total_3hz_ch2
+        print(f'ch2 avg 3hz: {avg_ch2_power_3hz}')
+        avg_ch2_power_10hz = sum_ch2_power_10hz / total_10hz_ch2
+        print(f'ch2 avg 10hz: {avg_ch2_power_10hz}')
+        ch2_power_ratio = avg_ch2_power_3hz / avg_ch2_power_10hz
 
-        ten_min_ratios_ch1 = np.append(ten_min_ratios_ch1, avg_3hz_psd_ch1/avg_10hz_psd_ch1)
-        ten_min_ratios_ch2 = np.append(ten_min_ratios_ch2, avg_3hz_psd_ch2/avg_10hz_psd_ch2)
+        ten_min_ratios_ch1 = np.append(ten_min_ratios_ch1, ch1_power_ratio)
+        ten_min_ratios_ch2 = np.append(ten_min_ratios_ch2, ch2_power_ratio)
 
     # print(f'all ten min rations channel1: {ten_min_ratios_ch1}')
     # print(f'all ten min rations channel2: {ten_min_ratios_ch2}')
+
+    print(f'Ten_min_ratios_ch1: {ten_min_ratios_ch1}')
 
     final_hour_ratio_avgs_ch1 = np.array([])
     final_hour_ratio_avgs_ch2 = np.array([])    
