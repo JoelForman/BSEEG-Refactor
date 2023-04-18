@@ -25,10 +25,14 @@ def readEDF(filepath, filldisrupt = False):
     print('signal_labels: ', signal_labels)
 
     channel1 = file.readSignal(0)
+    print('channel1: ', channel1)
     channel2 = file.readSignal(1)
 
     #get the number of hours
     srate = file.getSampleFrequency(0)
+    print('srate ch1: ', srate)
+    print('srate ch2: ', file.getSampleFrequency(1))
+
     total_seconds = file.getFileDuration()
     # print('total_seconds: ', total_seconds)
     # print('length of first signal: ', len(channel1))
@@ -57,9 +61,11 @@ def readEDF(filepath, filldisrupt = False):
         # filtered_10hz_ch1 = np.array([x for x in ten_min_signals_ch1 if 9.5 <= x <= 10])
         # filtered_10hz_ch2 = np.array([x for x in ten_min_signals_ch2 if 9.5 <= x <= 10])
 
-        ten_min_psd_ch1_freqs, ten_min_psd_ch1_power  = signal.welch(ten_min_signals_ch1, len(ten_min_signals_ch1) / 12000)
+        ten_min_psd_ch1_freqs, ten_min_psd_ch1_power  = signal.welch(ten_min_signals_ch1, srate, nperseg=srate*8)
         #print(f'len comparison: {len(ten_min_psd_ch1_freqs)} and {len(ten_min_psd_ch1_power)}')
-        ten_min_psd_ch2_freqs, ten_min_psd_ch2_power = signal.welch(ten_min_signals_ch2, len(ten_min_signals_ch1) / 12000)
+        # len(ten_min_signals_ch1) / 12000
+
+        ten_min_psd_ch2_freqs, ten_min_psd_ch2_power = signal.welch(ten_min_signals_ch2, srate, nperseg=srate*8)
         #print(f'len comparison: {len(ten_min_psd_ch2_freqs)} and {len(ten_min_psd_ch2_power)}')
 
         print(f'ch1 freqs: {ten_min_psd_ch1_freqs}')
@@ -157,7 +163,7 @@ def readEDF(filepath, filldisrupt = False):
     print(f'standardized final hour by hour ratios ch2: \n{standardized_ratio_avgs_ch2}\n\n')
 
     #return (final_hour_ratio_avgs_ch1 - np.mean(final_hour_ratio_avgs_ch1)) / np.std(final_hour_ratio_avgs_ch1), (final_hour_ratio_avgs_ch2 - np.mean(final_hour_ratio_avgs_ch2)) / np.std(final_hour_ratio_avgs_ch2)
-    return standardized_ratio_avgs_ch1, standardized_ratio_avgs_ch2
+    return final_hour_ratio_avgs_ch1, final_hour_ratio_avgs_ch2
 
 @app.route('/analysis.html', methods=['GET', 'POST'])
 def analysis():
