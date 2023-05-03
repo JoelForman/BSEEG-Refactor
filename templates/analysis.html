@@ -1,56 +1,75 @@
-{% extends "bootstrap/base.html" %}
-
-{% block styles %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/analysis.css')}}">
-<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-{% endblock %}
-
-{% block scripts %}
-{{super()}}
+{% extends "bootstrap/base.html" %} {% block styles %}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/analysis.css')}}"
+/>
+<link
+  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+{% endblock %} {% block scripts %} {{super()}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"
+  integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   var final_avg1 = {{ final_avg1|tojson }};
   var final_avg2 = {{ final_avg2|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/analysis2.js') }}">test</script>
-{% endblock %}
-
-{% block navbar %}
+<script src="{{ url_for('static', filename='js/analysis2.js') }}">
+  test
+</script>
+{% endblock %} {% block navbar %}
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">BSEEG Calculator</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Run</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-        </ul>
-      </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">BSEEG Calculator</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html"
+            >Run</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <main>
-    <div class="app-title">
-        <h1>BSEEG Score Graphical Analysis</h1>
-    </div>
-    <div class="chart-js">
-        <canvas id="line-chart"></canvas>
-    </div>
-    <div class="x-axis">
-      <h5>Hours</h5>
-    </div>
+  <div class="app-title">
+    <h1>BSEEG Score Graphical Analysis</h1>
+  </div>
+  <div class="chart-js">
+    <canvas id="line-chart"></canvas>
+  </div>
+  <div class="x-axis">
+    <h5>Hours</h5>
+  </div>
   <button type="button" class="btn btn-outline-success">Download as CSV</button>
 </main>
 {% endblock %}

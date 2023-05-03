@@ -1,57 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-body{
-    margin: 0;
-    padding: 0;
-    display: flex;
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
-.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link{
-    color: gray;
+.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link {
+  color: gray;
 }
-.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link:hover{
-    color: black;
+.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link:hover {
+  color: black;
 }
-.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link.active{
-    color: black;
+.navbar-nav.me-auto.mb-2.mb-lg-0 li a.nav-link.active {
+  color: black;
 }
-.navbar-brand{
-    color: black;
+.navbar-brand {
+  color: black;
 }
-.navbar-brand:hover{
-    color: black;
-    transition:all 0.4s;
+.navbar-brand:hover {
+  color: black;
+  transition: all 0.4s;
 }
-.container-fluid {        
-    margin-right: auto;    
-    margin-left: auto;    
-    max-width: 100%;    
-    min-width: 1440px;
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 100%;
+  min-width: 1440px;
 }
-.app-title{
-    font-size: 20px;
-    font-weight: 300;
-    color: #4B4B4B;
-    position: absolute;
-    top: 120px;
-    left: 440px;
+.app-title {
+  font-size: 20px;
+  font-weight: 300;
+  color: #4b4b4b;
+  position: absolute;
+  top: 120px;
+  left: 440px;
 }
-.info-list{
-    font-size: 18px;
-    font-weight: 275;
-    color: #4B4B4B;
-    position: absolute;
-    top: 195px;
-    left: 435px;
+.info-list {
+  font-size: 18px;
+  font-weight: 275;
+  color: #4b4b4b;
+  position: absolute;
+  top: 195px;
+  left: 435px;
 }
-.info-list li{
-    margin: 22px 0;
+.info-list li {
+  margin: 22px 0;
 }
-a:link { text-decoration: none; }
-a:visited { text-decoration: none; }
-a:hover { text-decoration: none; }
-a:active { text-decoration: none; }
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
