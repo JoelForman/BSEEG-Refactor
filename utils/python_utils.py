@@ -23,6 +23,7 @@ def readEDF(filepath, filldisrupt = False):
     ten_min_ratios_ch1 = np.array([])
     ten_min_ratios_ch2 = np.array([])
 
+    # Iterate over EEG data and get the BSEEG score for every 10 minute window
     for i in range(0, int(num_ten_min_intervals)):
         ten_min_signals_ch1 = channel1[i*samples_per_ten_mins:(i*samples_per_ten_mins + samples_per_ten_mins)]
         ten_min_signals_ch2 = channel2[i*samples_per_ten_mins:(i*samples_per_ten_mins + samples_per_ten_mins)]
@@ -45,6 +46,7 @@ def readEDF(filepath, filldisrupt = False):
         sum_ch2_power_10hz = 0
         total_10hz_ch2 = 0
 
+        # Filter for power numbers corresponding to frequencies between (3-3.5 Hz) or (9.5-10 Hz) for channel 1 and 2
         for j in range(len(ten_min_psd_ch1_freqs)):
             if 3 <= ten_min_psd_ch1_freqs[j] <= 3.5:
                 sum_ch1_power_3hz += ten_min_psd_ch1_power[j]
@@ -81,6 +83,7 @@ def readEDF(filepath, filldisrupt = False):
     final_hour_ratio_avgs_ch1 = np.array([])
     final_hour_ratio_avgs_ch2 = np.array([])    
 
+    # Calculate the average BSEEG Score (power ratio) over every hour
     for i in range(len(ten_min_ratios_ch1) // 6):
         sum = 0
         num_total = 0
