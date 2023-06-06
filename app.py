@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 import numpy as np
 from utils.python_utils import readEDF
+import os
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -25,6 +26,7 @@ def analysis():
             file.save('uploaded_file.edf')
             print(file)
             final_avg1, final_avg2 = readEDF('uploaded_file.edf')
+            os.remove('uploaded_file.edf')
         else:
             return 'Invalid file format. Only .edf files are allowed.'
             
