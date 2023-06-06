@@ -15,6 +15,8 @@ def index():
 def about():
     return render_template('about.html')
 
+save_path = '/home/BSEEG/BSEEG-Refactor/uploaded_file.edf'
+
 @app.route('/analysis.html', methods=['GET', 'POST'])
 def analysis():
     final_avg1 = final_avg2 = []
@@ -23,10 +25,10 @@ def analysis():
         filename = file.filename
 
         if file and filename.rsplit('.', 1)[1].lower() == 'edf':
-            file.save('uploaded_file.edf')
+            file.save(save_path)
             print(file)
-            final_avg1, final_avg2 = readEDF('uploaded_file.edf')
-            os.remove('uploaded_file.edf')
+            final_avg1, final_avg2 = readEDF(save_path)
+            os.remove(save_path)
         else:
             return 'Invalid file format. Only .edf files are allowed.'
             
