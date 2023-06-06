@@ -62,15 +62,15 @@ def readEDF(filepath, filldisrupt = False):
                 sum_ch2_power_10hz += ten_min_psd_ch2_power[j]
                 total_10hz_ch2 += 1
 
-        avg_ch1_power_3hz = sum_ch1_power_3hz / total_3hz_ch1
+        avg_ch1_power_3hz = 0 if total_3hz_ch1 == 0 else sum_ch1_power_3hz / total_3hz_ch1
         print(f'avg_ch1_power_3: {avg_ch1_power_3hz}')
-        avg_ch1_power_10hz = sum_ch1_power_10hz / total_10hz_ch1
+        avg_ch1_power_10hz = 0 if total_10hz_ch1 == 0 else sum_ch1_power_10hz / total_10hz_ch1
         print(f'avg_ch1_power_10: {avg_ch1_power_10hz}')
-        ch1_power_ratio = avg_ch1_power_3hz / avg_ch1_power_10hz
+        ch1_power_ratio = 0 if avg_ch1_power_10hz == 0 else avg_ch1_power_3hz / avg_ch1_power_10hz
 
-        avg_ch2_power_3hz = sum_ch2_power_3hz / total_3hz_ch2
-        avg_ch2_power_10hz = sum_ch2_power_10hz / total_10hz_ch2
-        ch2_power_ratio = avg_ch2_power_3hz / avg_ch2_power_10hz
+        avg_ch2_power_3hz = 0 if total_3hz_ch2 == 0 else sum_ch2_power_3hz / total_3hz_ch2
+        avg_ch2_power_10hz = 0 if total_10hz_ch2 == 0 else sum_ch2_power_10hz / total_10hz_ch2
+        ch2_power_ratio = 0 if avg_ch2_power_10hz == 0 else avg_ch2_power_3hz / avg_ch2_power_10hz
 
         print('FinalAvg_ch1: ', ch1_power_ratio)
         print('curr i: ', i)
