@@ -15,7 +15,7 @@ def index():
 def about():
     return render_template('about.html')
 
-save_path = '/home/BSEEG/BSEEG-Refactor/uploaded_file.edf'
+save_path = './uploaded_file.edf'
 
 @app.route('/analysis.html', methods=['GET', 'POST'])
 def analysis():
